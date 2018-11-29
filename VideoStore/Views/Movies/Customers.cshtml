@@ -1,0 +1,41 @@
+﻿@model IEnumerable< VideoStore.Models.Customer>
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+
+
+
+
+@if (Model.Any())
+{
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>MembershipType</th>
+            </tr>
+        </thead>
+        @foreach (var cust in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(cust.Name, "Edit","Customer",new { Id = cust.Id},null)
+                </td>
+                <td>
+                    @cust.MembershipType.Name
+                </td>
+            </tr>
+        }
+    </table>
+
+
+}
+else
+{
+    <h3>There are no customers yet!</h3>
+}
+

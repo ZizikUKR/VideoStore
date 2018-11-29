@@ -1,0 +1,18 @@
+﻿@model IEnumerable<VideoStore.Models.Movie>
+
+@{
+    ViewBag.Title = "MovieName";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movies</h2>
+@Html.ActionLink("New Film", "NewMovie", "Movies", new { @class="btn btn-primary"})
+<table class="table table-bordered table-hover">
+  @foreach(var a in Model)
+  {
+      <tr><td>@Html.ActionLink(a.Name, "EditMovie", "Movies",new { Id = a.Id },null)</td></tr>
+      
+  }
+</table>
+
+

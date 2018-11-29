@@ -1,0 +1,47 @@
+﻿@model VideoStore.ViewModels.NewCustomerViewModel
+
+@{
+    /**/
+
+    ViewBag.Title = "NewCustomer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Customer</h2>
+
+@using (Html.BeginForm("SaveCust", "Movies"))
+{
+    @Html.ValidationSummary(true,"Please fix the following errors!")
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.Name)
+        @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.Name, "Pleas write down the name", new { @class = "danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.MembershipTypeId)
+        @Html.DropDownListFor(m => m.Customer.MembershipTypeId, new SelectList(Model.MembershipType, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.MembershipTypeId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.CustomerBirthday)
+        @Html.TextBoxFor(m => m.Customer.CustomerBirthday,@*"{0:d MMM yyyy",*@                                                                                            /**/
+                                                                                                    new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.CustomerBirthday)
+    </div>
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsLater) Is Subscribed ToNews?
+        </label>
+    </div>
+    @Html.HiddenFor(m => m.Customer.Id)
+    <input type="submit" class="btn btn-primary" name="Save" />
+}
+
+@section scripts{
+    @Html.AntiForgeryToken()
+    @Scripts.Render("~/bundles/jqueryval")
+    }
